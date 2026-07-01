@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Un jardín para ti 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#000;
+  overflow:hidden;
+  font-family:'Quicksand', sans-serif;
+  color:white;
+}
+
+/* 🌸 FONDO JARDÍN */
+#garden{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  overflow:hidden;
+  z-index:0;
+}
+
+/* 🌸 FLORES */
+.flower{
+  position:absolute;
+  font-size:20px;
+  animation: floatUp linear infinite;
+  pointer-events:none;
+}
+
+@keyframes floatUp{
+  0%{
+    transform:translateY(0) scale(1);
+    opacity:0;
+  }
+  20%{
+    opacity:1;
+  }
+  100%{
+    transform:translateY(-120vh) scale(1.3);
+    opacity:0;
+  }
+}
+
+/* 🌸 INTRO */
+.intro{
+  position:fixed;
+  width:100%;
+  height:100vh;
+  background:#000;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  z-index:10;
+}
+
+.intro h1{
+  font-family:'Dancing Script';
+  color:#ff6b8b;
+}
+
+button{
+  margin-top:20px;
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(45deg,#ff6b8b,#ff9e7d);
+  color:white;
+  cursor:pointer;
+}
+
+/* 🌸 MAIN */
+.main{
+  display:none;
+  position:relative;
+  height:100vh;
+  z-index:2;
+}
+
+/* 💌 MENSAJE CENTRAL */
+.centerText{
+  position:absolute;
+  width:100%;
+  top:40%;
+  text-align:center;
+  font-family:'Dancing Script';
+  font-size:22px;
+  opacity:0.9;
+}
+
+/* 💌 CARTA */
+.letter{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  max-height:45%;
+  overflow:auto;
+  background:rgba(0,0,0,0.75);
+  padding:15px;
+  font-size:14px;
+  line-height:1.5;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 🌸 JARDÍN -->
+<div id="garden"></div>
+
+<!-- 🌸 INTRO -->
+<div class="intro" id="intro">
+  <h1>Antes de comenzar 💖</h1>
+  <p>Ponte tus audífonos 🎧</p>
+  <p>Esto no es un regalo…</p>
+  <p>Es un pequeño jardín para ti 🌸</p>
+  <button onclick="start()">Estoy lista 💖</button>
+</div>
+
+<!-- 🌸 MAIN -->
+<div class="main" id="main">
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="centerText">
+  Para ti, mi amor 💖<br>
+  Cada flor es un recuerdo contigo 🌸
+</div>
+
+<!-- 💌 CARTA -->
+<div class="letter">
+
+💌 Para ti<br><br>
+
+Si estás leyendo esto, significa que llegaste a un lugar donde guardé algo especial para ti.<br><br>
+
+Desde que llegaste todo es más bonito.<br><br>
+
+Me importas más de lo que digo.<br><br>
+
+Eres mi paz, incluso cuando no digo nada.<br><br>
+
+Gracias por existir en mi vida.<br><br>
+
+Feliz cumpleaños, mi amor 💖
+
+</div>
+
+</div>
+
+<script>
+
+function start(){
+  document.getElementById("intro").style.display="none";
+  document.getElementById("main").style.display="block";
+
+  const music = document.getElementById("music");
+  music.volume = 0.4;
+  music.play();
+}
+
+/* 🌸 FLORES FLOTANTES */
+function createFlower(){
+  const f = document.createElement("div");
+  f.className = "flower";
+
+  const flowers = ["🌸","🌺","💮","🌷","💖"];
+  f.innerHTML = flowers[Math.floor(Math.random()*flowers.length)];
+
+  f.style.left = Math.random()*100 + "vw";
+  f.style.fontSize = (14 + Math.random()*20) + "px";
+  f.style.animationDuration = (5 + Math.random()*6) + "s";
+
+  document.getElementById("garden").appendChild(f);
+
+  setTimeout(()=>f.remove(),12000);
+}
+
+setInterval(createFlower,300);
+
+</script>
+
+</body>
+</html>
